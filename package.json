@@ -5,17 +5,18 @@
   "main": "index.js",
   "scripts": {
     "start": "node server/server.js",
-    "start-watch": "nodemon --exec \"npm start\"",
+    "start-watch": "nodemon -e js,html --exec \"npm start\"",
     "test": "export NODE_ENV=test || SET \"NODE_ENV=test\" && mocha server/**/*.test.js",
     "test-watch": "nodemon --exec \"npm test\""
   },
   "engines": {
-    "node": "8.4.0"
+    "node": "8.4.0npm "
   },
   "author": "Eric Julius",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.15.4"
+    "express": "^4.15.4",
+    "socket.io": "^2.0.3"
   },
   "devDependencies": {
     "eslint": "^4.6.1",
