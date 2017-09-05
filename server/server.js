@@ -21,9 +21,10 @@ io.on('connection', (socket) => {
   socket.emit('newMessage', generateMessage('admin', 'Welcome to the chat!'));
   socket.broadcast.emit('newMessage', generateMessage('admin', 'A new user has joined the chat.'));
 
-  socket.on('createMessage', (message) => {
+  socket.on('createMessage', (message, cb) => {
     const createMessage = _.pick(message, ['from', 'text']);
     io.emit('newMessage', generateMessage(createMessage.from, createMessage.text));
+    cb('success');
   });
 
   socket.on('disconnect', () => {
