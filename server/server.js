@@ -4,7 +4,7 @@ const express = require('express');
 const socketIO = require('socket.io');
 const _ = require('lodash');
 
-const { generateMessage } = require('./utils/message');
+const { generateMessage, generateLocationMessage } = require('./utils/message');
 
 require('./config/config');
 const publicPath = path.join(`${__dirname}/../public`);
@@ -25,6 +25,11 @@ io.on('connection', (socket) => {
     const createMessage = _.pick(message, ['from', 'text']);
     io.emit('newMessage', generateMessage(createMessage.from, createMessage.text));
     cb('success');
+  });
+
+  socket.on('createLocationMessage', (coords, cb) => {
+    io.emit('newLocationMessage', generateLocationMessage('Admin', coords.latitude, coords.longitude));
+    cb('Location Success');
   });
 
   socket.on('disconnect', () => {
