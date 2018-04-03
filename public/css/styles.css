@@ -75,9 +75,13 @@ button:disabled {
   margin-bottom: 7px;
 }
 
-.form-field input, .form-field select {
+.form-field input, .form-field select, .form-field textarea {
   border: 1px solid #e1e1e1;
   padding: 10px;
+}
+
+textarea {
+  width: 100%;
 }
 
 .chat {
@@ -193,4 +197,29 @@ button:disabled {
   .chat__footer button {
     margin-right: 0px;
   }
+}
+
+code {
+  font-family: monospace;
+  padding: 0.2em 0.4em;
+  margin: 0;
+  background-color: rgba(27,31,35,0.05);
+  border-radius: 3px;
+}
+
+pre {
+  font-family: monospace;
+  word-wrap: normal;
+}
+
+pre>code {
+  font-family: monospace;
+  padding: 10px;
+  margin: 0;
+  font-size: 100%;
+  word-break: normal;
+  background-color: rgba(27,31,35,0.05);
+  border-radius: 3px;
+  display: block;
+  word-wrap: break-word;
 }

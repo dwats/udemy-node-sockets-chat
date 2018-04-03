@@ -16,7 +16,7 @@
       <ol id="messages" class="chat__messages" ></ol>
       <div class="chat__footer">
         <form class="" id="message-form">
-          <input name="message" type="text" placeholder="Lorem ipsum..." autofocus autocomplete="off" />
+          <textarea name="message" type="text" placeholder="Lorem ipsum..." autofocus autocomplete="off"></textarea>
           <button>Send</button>
         </form>
         <button id="send-location">Send location</button>
@@ -30,7 +30,7 @@
           <span>{{created}}</span>
         </div>
         <div class="message__body">
-          <p>{{text}}</p>
+          <p>{{&text}}</p>
         </div>
       </li>
     </script>
@@ -47,6 +47,7 @@
       </li>
     </script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.8.6/showdown.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/js/libs/jquery-3.2.1.min.js"></script>
     <script src="/js/libs/moment.js"></script>

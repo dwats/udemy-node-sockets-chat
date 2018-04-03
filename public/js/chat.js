@@ -1,4 +1,5 @@
 const socket = io();
+const converter = new showdown.Converter()
 
 socket.on('connect', function () {
   const params = $.deparam(window.location.search);
@@ -34,8 +35,9 @@ socket.on('newMessage', function (message) {
   let html = Mustache.render(template, {
     created: formattedTime,
     from: message.from,
-    text: message.text
+    text: converter.makeHtml(message.text)
   });
+
   $('#messages').append(html);
   scrollToBottom();
 });
