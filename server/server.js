@@ -2,7 +2,6 @@ const path = require('path');
 const http = require('http');
 const express = require('express');
 const socketIO = require('socket.io');
-const _ = require('lodash');
 
 const { generateMessage, generateLocationMessage } = require('./utils/message');
 const { isRealString } = require('./utils/validation');
@@ -37,14 +36,21 @@ io.on('connection', (socket) => {
   });
 
   socket.on('createMessage', (message, cb) => {
-    const createMessage = _.pick(message, ['from', 'text']);
-    io.emit('newMessage', generateMessage(createMessage.from, createMessage.text));
-    cb('success');
+    const user = users.getUser(socket.id);
+    if (user && isRealString(message.text)) {
+      io.to(user.room).emit('newMessage', generateMessage(user.name, message.text));
+      return cb('Message Success');
+    }
+    return cb('Message Error');
   });
 
   socket.on('createLocationMessage', (coords, cb) => {
-    io.emit('newLocationMessage', generateLocationMessage('Admin', coords.latitude, coords.longitude));
-    cb('Location Success');
+    const user = users.getUser(socket.id);
+    if (user) {
+      io.to(user.room).emit('newLocationMessage', generateLocationMessage(user.name, coords.latitude, coords.longitude));
+      return cb('Location Success');
+    }
+    return cb('Location Message Error');
   });
 
   socket.on('disconnect', () => {

@@ -82,7 +82,7 @@ locationButton.on('click', function () {
 });
 
 function sendMessage (from, text) {
-  socket.emit('createMessage', { from, text }, function (res) {
+  socket.emit('createMessage', { text }, function (res) {
     console.log(res);
   });
 }
