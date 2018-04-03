@@ -6,6 +6,8 @@ const socketIO = require('socket.io');
 const { generateMessage, generateLocationMessage } = require('./utils/message');
 const { isRealString } = require('./utils/validation');
 const Users = require('./utils/users');
+const Chats = require('./utils/chats');
+// const Messages = require('/utils/messages');
 
 require('./config/config');
 const publicPath = path.join(`${__dirname}/../public`);
@@ -14,8 +16,22 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIO(server);
 const users = new Users();
+const chats = new Chats();
+// const messages = new Messages();
 
 app.use(express.static(publicPath));
+
+// Additional Ideas
+//  Unique user names (descriminator?)
+//  Formatting in messages (markdown)
+//    Add XSS Injection sanitization (xss-filters)
+//  Embedded media
+//  List of chat rooms
+//  Persistent chat history
+//    edit your own messages
+//    delete your own messages
+//  case-insensitive room names
+//  @ mentions
 
 io.on('connection', (socket) => {
   console.log('User connected');
